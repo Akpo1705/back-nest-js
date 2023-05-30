@@ -3,6 +3,7 @@ import { SequelizeModule } from "@nestjs/sequelize";
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from "@nestjs/config";
 import { User } from "./users/user.model";
+import { Event } from "./event/event.model"
 import { RolesModule } from './roles/roles.module';
 import { Role } from "./roles/roles.model";
 import { UserRoles } from "./roles/users-roles.model";
@@ -11,6 +12,7 @@ import { PostsModule } from './posts/posts.module';
 import { Post } from "./posts/posts.model";
 import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from "@nestjs/serve-static";
+import { EventModule } from './event/event.module';
 import * as path from 'path';
 
 @Module({
@@ -27,10 +29,10 @@ import * as path from 'path';
                         dialect: 'postgres',
                         host: process.env.URL_PG,
                         port: Number(process.env.PORT_PG),
-                        username: 'postgres',
-                        password: process.env.POSTGRES_PASSWORD,
+                        username: process.env.POSTGRES_USER,
+                        password: String(process.env.POSTGRES_PASSWORD),
                         database: process.env.POSTGRES_DB_NAME,
-                        models: [User, Role, UserRoles, Post],
+                        models: [User, Role, UserRoles, Post, Event],
                         autoLoadModels: true
                 }),
                 UsersModule,
@@ -38,6 +40,7 @@ import * as path from 'path';
                 AuthModule,
                 PostsModule,
                 FilesModule,
+                EventModule,
         ],
 })
 export class AppModule { }

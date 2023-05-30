@@ -36,10 +36,20 @@ export class User extends Model<User, UserCreationAttrs>{
         @Column({type: DataType.BOOLEAN, defaultValue: false})
         moderator: boolean;
 
+        @ApiProperty({example:'false', description: 'является ли организатором'})
+        @Column({type: DataType.BOOLEAN, defaultValue: false})
+        organizator: boolean;
+
+        @ApiProperty({example:'забег титанов', description: 'наименование старта, если является организатором'})
+        @Column({type: DataType.BOOLEAN, defaultValue: false})
+        eventName: string;
+
         @BelongsToMany(()=>Role, () => UserRoles)
         roles: Role[];
 
         @HasMany(()=> Post)
         post: Post[];
         
+        // @HasMany(()=>Event)
+        // event: Event[];
 }

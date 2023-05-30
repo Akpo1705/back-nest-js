@@ -17,7 +17,4 @@ export class ValidationPipe implements PipeTransform<any>{
                 }
                 return value;
         }
-
-
-
 }

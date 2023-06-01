@@ -8,6 +8,8 @@ import { UserRoles } from 'src/roles/users-roles.model';
 import { RolesModule } from 'src/roles/roles.module';
 import { AuthModule } from 'src/auth/auth.module';
 import { Post } from 'src/posts/posts.model';
+import { EventsModule } from 'src/events/events.module';
+import { Event } from 'src/events/event.model';
 
 @Module({
   controllers: [UsersController],
@@ -19,8 +21,10 @@ import { Post } from 'src/posts/posts.model';
                 Role,
                 UserRoles,
                 Post,
+                Event
         ]),
         forwardRef(()=> AuthModule),
+        forwardRef(()=> EventsModule)
   ],
   exports: [UsersService]
 })

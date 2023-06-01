@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, DataType, IsUUID, Model, PrimaryKey, Table, HasOne, ForeignKey } from "sequelize-typescript";
+import { Column, DataType, IsUUID, Model, PrimaryKey, Table, HasOne, ForeignKey, BelongsTo } from "sequelize-typescript";
 import { User } from "src/users/user.model";
 
 
@@ -14,18 +14,21 @@ export class Event extends Model<Event, EventCreateAttr>{
 
         @PrimaryKey
         @IsUUID(4)
-        @Column({type: DataType.UUID, defaultValue: DataType.UUIDV4})
+        @Column({type: DataType.UUID, unique: true, defaultValue: DataType.UUIDV4})
         id: string
 
         @ApiProperty({example:'Наименование', description: 'Имя'})
-        @Column({type: DataType.STRING, unique: true, allowNull: false})
+        @Column({type: DataType.STRING, unique: false, allowNull: false})
         name: string;
 
         @ApiProperty({example:'Наименование', description: 'Имя'})
         @Column({type: DataType.STRING, unique: true})
         description: string;
-
         
-        // @HasOne(()=>User, 'id')
-        // user_id: number
+        @ForeignKey(() => User)
+        @Column({type: DataType.INTEGER})
+        user_id: number;
+
+        @BelongsTo(() => User)
+        author: User;
 }

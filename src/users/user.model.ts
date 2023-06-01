@@ -1,8 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { AutoIncrement, BelongsToMany, Column, DataType, HasMany, Model, PrimaryKey, Table } from "sequelize-typescript";
+import { EventsModule } from "src/events/events.module";
 import { Post } from "src/posts/posts.model";
 import { Role } from "src/roles/roles.model";
 import { UserRoles } from "src/roles/users-roles.model";
+import { Event } from "src/events/event.model";
 
 interface UserCreationAttrs{
         email: string;
@@ -51,6 +53,9 @@ export class User extends Model<User, UserCreationAttrs>{
 
         @HasMany(()=> Post)
         post: Post[];
+
+        @HasMany(()=>Event)
+        event: Event[]
         
         // @HasMany(()=>Event)
         // event: Event[];

@@ -1,4 +1,14 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, SetMetadata, UseGuards } from '@nestjs/common';
 
 @Controller('organizator')
-export class OrganizatorController {}
+export class OrganizatorController {
+
+        // @Get()
+        // @SetMetadata('role','admin')
+        // @UseGuards(AuGuard)
+        // testGuard(){
+
+        //         return 'testGuard'
+        // }
+
+}

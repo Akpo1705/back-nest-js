@@ -1,15 +1,15 @@
-import { ArgumentMetadata, Injectable, PipeTransform } from "@nestjs/common";
+import { ArgumentMetadata, Injectable, ParseUUIDPipe, PipeTransform } from "@nestjs/common";
 import { plainToClass } from "class-transformer";
 import { validate } from "class-validator";
+import { IsUUID } from "sequelize-typescript";
 import { ValidationException } from "src/exeptions/validation.exception";
 
 @Injectable()
 export class ValidationPipe implements PipeTransform<any>{
         async transform(value: any, metadata: ArgumentMetadata): Promise<any> {
                 const obj = plainToClass(metadata.metatype, value);
-                
-                console.log(metadata);
-                console.log(value);
+
+                console.log(obj);
 
                 if(metadata.type === 'param')
                         return value;

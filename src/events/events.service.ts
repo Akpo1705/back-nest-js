@@ -1,15 +1,18 @@
-import { Get, Injectable } from '@nestjs/common';
+import { Get, Inject, Injectable, Scope } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Event } from './event.model';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UsersService } from 'src/users/users.service';
 import { DeleteEventDto } from './dto/delete.event.dto';
 import { UpdateEventDto } from './dto/update.event.dto';
+import { REQUEST } from '@nestjs/core';
 
-@Injectable()
+@Injectable({scope: Scope.REQUEST})
 export class EventsService {
 
-        constructor(@InjectModel(Event) private eventRepository: typeof Event, private userService: UsersService){}
+        constructor(@InjectModel(Event) private eventRepository: typeof Event, 
+                        private userService: UsersService,
+                        @Inject(REQUEST) private readonly request: Request){}
 
         async getAll(){
                 return this.eventRepository.findAll();

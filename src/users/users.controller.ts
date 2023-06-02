@@ -26,7 +26,7 @@ export class UsersController {
 
         @ApiOperation({summary: 'Получение всех пользователей'})
         @ApiResponse({status: 200, type: [User]})
-        @Roles("ADMIN")
+        @Roles("Admin")
         @UseGuards(RolesGuard)
         @Get()
         getAll(){
@@ -35,7 +35,7 @@ export class UsersController {
 
         @ApiOperation({summary: 'Выдать роль'})
         @ApiResponse({status: 200})
-        @Roles("ADMIN")
+        @Roles("Admin")
         @UseGuards(RolesGuard)
         @Post('/role')
         addRole(@Body() dto: AddRoleDto){
@@ -45,7 +45,7 @@ export class UsersController {
 
         @ApiOperation({summary: 'Забанить пользователя'})
         @ApiResponse({status: 200})
-        @Roles("ADMIN")
+        @Roles("Admin")
         @UseGuards(RolesGuard)
         @Post('/ban')
         ban(@Body() dto: BanUserDto){

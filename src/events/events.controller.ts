@@ -3,6 +3,8 @@ import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update.event.dto';
 
+import val = require('uuid-validate')
+
 @Controller('events')
 export class EventsController {
         constructor(private eventService: EventsService){}
@@ -23,8 +25,13 @@ export class EventsController {
         }
 
         @Get('/:uuid')
-        getOneEvent(@Param()value: string){
-                return this.eventService.getEventByUuid(value);
+        getOneEvent(@Param('uuid', new ParseUUIDPipe())uuid: string){
+                return this.eventService.getEventByUuid(uuid);
+        }
+
+        @Get('/:uuid/description')
+        OneEvent(@Param('uuid', new ParseUUIDPipe())uuid: string){
+                return 'description event'
         }
 
         @Put('/:uuid')
